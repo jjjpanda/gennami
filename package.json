@@ -1,0 +1,25 @@
+{
+  "name": "kyonami",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Retrofuturist quantum-to-classical emergence space where causal interactions collapse waves into particles",
+  "exports": "./src/main.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "test": "node --test",
+    "clean": "node scripts/clean.js",
+    "build": "node scripts/build.js",
+    "benchmark": "node scripts/benchmark.js",
+    "benchmark:throughput": "node scripts/throughput-benchmark.js",
+    "check:http": "node scripts/http-check.js",
+    "check:browser": "playwright test",
+    "preview:browser": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}
