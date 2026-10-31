@@ -4,6 +4,8 @@ An interactive quantum-to-classical simulation. Waves interfere, interactions fo
 
 [Open the app](https://jjjpanda.github.io/kyonami/) · [Embed view](https://jjjpanda.github.io/kyonami/embed/)
 
+![Kyonami showing colliding beams, simulation controls, and the entity inspector](screenshots/kyonami.png)
+
 ## Iframe
 
 ```html
