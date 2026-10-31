@@ -11,7 +11,11 @@ export default defineConfig({
   timeout: 90000,
   expect: { timeout: 10000 },
   outputDir: '.artifacts/playwright',
-  reporter: [['list'], ['html', { outputFolder: '.artifacts/playwright-report', open: 'never' }]],
+  reporter: [
+    ['list'],
+    ...(process.env.CI ? [['github']] : []),
+    ['html', { outputFolder: '.artifacts/playwright-report', open: 'never' }]
+  ],
   use: {
     channel: process.env.PLAYWRIGHT_CHANNEL ?? (process.platform === 'win32' ? 'msedge' : undefined),
     baseURL: `http://127.0.0.1:${port}`,
