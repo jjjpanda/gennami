@@ -573,12 +573,16 @@ test('100% viewport responsive retrofuturist quantum cosmos renders, evolves, an
   expect(reversedDepth).toBeLessThan(initialDepth);
 
   // Test slingshot EMIT mode: dragging down-left flings wavepacket up-right (opposite of drag)
+  // Inspect the launch before subsequent forces or reactions can change it.
+  await chamber.evaluate(el => el.setPlaying(false));
+  await expect.poll(() => chamber.evaluate(el => el.client.busy)).toBe(false);
+  const selectedBeforeEmit = await chamber.evaluate(el => el.frame.selectedId);
   await chamber.locator('[data-mode="emit"]').click();
   await page.mouse.move(centerX, centerY);
   await page.mouse.down();
   await page.mouse.move(centerX - 60, centerY + 50, { steps: 5 });
   await page.mouse.up();
-  await page.waitForTimeout(120);
+  await expect.poll(() => chamber.evaluate(el => el.frame.selectedId)).not.toBe(selectedBeforeEmit);
 
   const spawned = await chamber.evaluate(el => el.frame?.selectedInspector);
   expect(spawned).toBeTruthy();
@@ -587,6 +591,7 @@ test('100% viewport responsive retrofuturist quantum cosmos renders, evolves, an
 
   // Switch preset to Soliton Collider and capture screenshot
   await chooseOption(chamber, 'Simulation preset', 'Colliding beams');
+  await chamber.evaluate(el => el.setPlaying(true));
   await page.waitForTimeout(500);
 
   if (testInfo.project.name === 'desktop') {
