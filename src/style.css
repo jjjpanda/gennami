@@ -882,6 +882,8 @@ kbd {
     width: 44px;
     height: 44px;
     pointer-events: auto;
+    /* Visibility must update immediately when closing panels restores focus. */
+    transition-property: background-color, border-color, color, box-shadow;
     z-index: 3;
   }
 

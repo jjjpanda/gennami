@@ -24,6 +24,7 @@ test('controls and canvas use IBM Plex Mono with a circular basin', async ({ pag
 });
 
 async function openPanel(chamber, panel = 'controls') {
+  await expect.poll(() => chamber.evaluate(el => Boolean(el.frame))).toBe(true);
   const toggle = chamber.locator('[data-action="toggle-panels"]');
   if (!await toggle.isVisible() && !await chamber.locator('.panel-menu-header').isVisible()) return;
   if (await toggle.isVisible() && await toggle.getAttribute('aria-expanded') === 'false') await toggle.click();
@@ -93,7 +94,7 @@ test('panels use full-height tabs through 1100px and split above, with one contr
       await chamber.locator('.inspector-guide summary').click();
       await page.keyboard.press('Escape');
       await expect(chamber.locator('.hud-panels')).toBeHidden();
-      await expect(toggle).toBeFocused();
+      await expect(toggle, `Panel toggle should regain focus at ${width}×${height}`).toBeFocused();
       await toggle.press('Space');
       await expect(chamber.locator('.hud-inspector')).toBeVisible();
       expect(await chamber.evaluate(el => el.globalReverseHeld)).toBe(false);
