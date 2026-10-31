@@ -376,7 +376,7 @@ test('EMIT popup chooses the particle type for clicks and slingshot launches', a
       expect(flavor === 0 ? [-1, 1] : [0]).toContain(particle.spin);
       await expect(chamber.locator('[data-inspector="species"]')).toHaveText(`SIMULATED SPECIES · SPIN ${particle.spin > 0 ? '+' : ''}${particle.spin}`);
       await expect(chamber.locator('[data-inspector="mass"]')).toHaveText(`RELATIVE MASS ${[1, 1, 0.5, 3, 0][flavor]}×`);
-      await expect(chamber.locator('[data-inspector="description"]')).toContainText(['Randomly assigned spin', 'Brings opposite spinners together', 'lightweight particle', 'heavy particle', 'massless energy packet'][flavor]);
+      await expect(chamber.locator('[data-inspector="description"]')).toContainText(['Randomly assigned spin', 'Brings opposite spinners together', 'lightweight particle', 'heavy particle', 'massless wave packet'][flavor]);
       await expect(chamber.locator('[data-inspector="energy"]')).toContainText(flavor === 4 ? 'PHOTON ENERGY 24.0' : 'EXCITATION 0.0');
     }
   }
